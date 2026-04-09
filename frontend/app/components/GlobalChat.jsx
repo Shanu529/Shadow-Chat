@@ -1,62 +1,77 @@
 "use client";
 
+import {v4 as uuidv4} from "uuid"
 import { useState, useEffect, useRef } from "react";
 import MessageBubble from "./MessageBubble";
 import TypingInput from "./TypingInput";
 
 import {socket} from "../lib/socket"
 
-
+import {useLayoutEffect} from "react"
 export default function GlobalChat() {
-  const myId = 12684;
+  // const myId = 12684;
+  const [myId] = useState(() =>
+  Math.random().toString(36).slice(2, 9)
+);
 
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      userId: 222,
-      text: "Welcome to ShadowChat 🌍",
-      username: "System",
-      ts: Date.now(),
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
 
   const bottomRef = useRef(null);
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  const [username, setUsername] = useState();
+
+ useLayoutEffect(() => {
+    bottomRef.current?.scrollIntoView();   
+  }, [messages.length]);
 
   const handleSend = (text) => {
     const newMsg = {
-      id: Date.now(),
+      id: uuidv4(),
       userId: myId,
       text,
-      username: "Me",
+      username: username ||"Shadow" ,
       ts: Date.now(),
     };
-
-    setMessages((prev) => [...prev, newMsg]);
+    socket.emit("message_send",newMsg);
   };
 
-  useEffect(()=>{
-    socket.connect();
 
-    // socket connection...
-    socket.on("connect",()=>{
-        console.log("soket connected", socket.id);
-    })
-    // socket error throw
-    socket.on("connect_error",(error)=>{
-        console.log("socket errror found..", error);
-        
-    })
-    return ()=>{
-        // socket disconnection...
-        socket.disconnect();
-    console.log("soket disconnected..", socket.id);
-    }
-    
-  },[])
+    useEffect(() => {
+  if (!socket.connected) {
+    socket.connect();
+  }
+
+  // listen first
+  socket.on("global_history", (msg) => {
+    console.log("history received", msg);
+    setMessages(msg);
+  });
+
+  socket.on("message_receive", (msg) => {
+    setMessages((prev) => {
+      if (prev.some((m) => m.id === msg.id)) return prev;
+      return [...prev, msg];
+    });
+  });
+
+  // 🔥 IMPORTANT
+  socket.on("connect", () => {
+    console.log("connected", socket.id);
+    socket.emit("join_global"); //  guaranteed
+  });
+
+  // also handle already connected
+  if (socket.connected) {
+    socket.emit("join_global");
+  }
+
+  return () => {
+    socket.off("global_history");
+    socket.off("message_receive");
+    socket.off("connect");
+  };
+}, []);
+
 
   return (
     <div className="flex flex-col h-full bg-black text-white">
