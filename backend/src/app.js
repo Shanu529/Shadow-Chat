@@ -19,10 +19,13 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-    cors: {
-        origin: "*"
-    },
+  cors: {
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST"],
+  },
 });
+
+
 console.log("here is host",process.env.HOST);
 console.log("here is password",process.env.PASSWORD);
 console.log("here is username",process.env.MY_USERNAME);
