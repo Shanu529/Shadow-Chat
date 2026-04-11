@@ -37,7 +37,7 @@ console.log("here is port",process.env.PORT);
 
 const redis = new Redis({
     host: process.env.HOST,
-    port: Number(process.env.PORT),
+    port: Number(process.env.REDIS_PORT),
     username: process.env.MY_USERNAME,
     password: process.env.PASSWORD,
 });
