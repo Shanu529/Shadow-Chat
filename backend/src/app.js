@@ -29,7 +29,7 @@ const io = new Server(server, {
 console.log("here is host",process.env.HOST);
 console.log("here is password",process.env.PASSWORD);
 console.log("here is username",process.env.MY_USERNAME);
-console.log("here is port",process.env.PORT);
+console.log("here is port",process.env.REDIS_PORT);
 
 
 // socket conneted
