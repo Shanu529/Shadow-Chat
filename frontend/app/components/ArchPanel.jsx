@@ -24,8 +24,8 @@ export default function ArchPanel() {
     },
     {
       icon: "⏱️",
-      title: "24hr TTL",
-      desc: "Messages auto-delete after 24 hours",
+      title: "5hr TTL",
+      desc: "Messages auto-delete after 5 hours",
     },
     {
       icon: "👻",

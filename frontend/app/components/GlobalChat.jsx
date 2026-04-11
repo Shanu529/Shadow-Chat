@@ -54,7 +54,7 @@ export default function GlobalChat() {
     });
   });
 
-  // 🔥 IMPORTANT
+  //  IMPORTANT
   socket.on("connect", () => {
     console.log("connected", socket.id);
     socket.emit("join_global"); //  guaranteed
@@ -79,14 +79,14 @@ export default function GlobalChat() {
         <div>
           <h2 className="text-sm font-semibold">🌍 Global Chat</h2>
           <p className="text-xs text-gray-400">
-            Messages disappear in 24 hours
+            Messages disappear in 5 hours
           </p>
         </div>
-
-        <div className="flex items-center gap-2 text-green-400 text-xs bg-[#1e1e2e] px-3 py-1 rounded-full">
+        {/* Online user  */}
+        {/* <div className="flex items-center gap-2 text-green-400 text-xs bg-[#1e1e2e] px-3 py-1 rounded-full">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
           32 online
-        </div>
+        </div> */}
       </div>
 
       
