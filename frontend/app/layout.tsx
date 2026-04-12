@@ -1,5 +1,10 @@
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { UserProvider } from "./context/UsersContext"
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata = {
   metadataBase: new URL("https://shadowchat.vercel.app"),
@@ -76,26 +81,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className="bg-black text-white">
-        <Navbar />
+        <UserProvider>
+          <Navbar />
 
-        {/* SEO structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              name: "Shadow Chat",
-              url: "https://shadowchat.vercel.app",
-              description:
-                "Anonymous real-time chat platform to talk with strangers worldwide.",
-            }),
-          }}
-        />
+          {/* SEO structured data */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                name: "Shadow Chat",
+                url: "https://shadowchat.vercel.app",
+                description:
+                  "Anonymous real-time chat platform to talk with strangers worldwide.",
+              }),
+            }}
+          />
 
-        <main className="">{children}</main>
+          <main className="">{children}</main>
+        </UserProvider>
       </body>
     </html>
   );

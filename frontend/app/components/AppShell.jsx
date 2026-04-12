@@ -17,9 +17,6 @@ export default function AppShell() {
 
   return (
     <div className="bg-[#080810] text-white flex flex-col items-center">
-
-      
-
       
       <div className="w-full lg:max-w-[600px] mt-4 bg-[#0d0d1a] px-2 md:px-0 md:border md:border-gray-800 rounded-2xl flex flex-col h-[85vh] overflow-hidden">
 

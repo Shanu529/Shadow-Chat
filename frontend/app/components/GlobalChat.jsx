@@ -5,15 +5,20 @@ import { useState, useEffect, useRef } from "react";
 import MessageBubble from "./MessageBubble";
 import TypingInput from "./TypingInput";
 
+import Loading from "./Loading";
 import {socket} from "../lib/socket"
 
 import {useLayoutEffect} from "react"
+
+
+import {useUser} from "../context/UsersContext";
+
 export default function GlobalChat() {
   // const myId = 12684;
   const [myId] = useState(() =>
   Math.random().toString(36).slice(2, 9)
 );
-
+const { user } = useUser();
   const [messages, setMessages] = useState([]);
 
   const bottomRef = useRef(null);
@@ -29,7 +34,7 @@ export default function GlobalChat() {
       id: uuidv4(),
       userId: myId,
       text,
-      username: username ||"Shadow" ,
+      username:user?.username || "Shadow",
       ts: Date.now(),
     };
     socket.emit("message_send",newMsg);
@@ -93,9 +98,7 @@ export default function GlobalChat() {
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 scroll-smooth">
 
         {messages.length === 0 && (
-          <div className="text-center text-gray-500 mt-20">
-            No messages yet...
-          </div>
+          <Loading/>
         )}
 
         {messages.map((msg) => (
