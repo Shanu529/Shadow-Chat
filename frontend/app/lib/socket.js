@@ -9,4 +9,5 @@ console.log("here is backend url:",URL)
 
 export const socket = io(URL, {
     autoConnect: false,
+    transports: ["websocket"], 
 })

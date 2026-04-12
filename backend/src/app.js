@@ -18,9 +18,10 @@ const app = express();
 
 const server = http.createServer(app);
 
+const allowOrigin = process.env.FRONTEND_URL.split(",");
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: allowOrigin,
     methods: ["GET", "POST"],
   },
 });
