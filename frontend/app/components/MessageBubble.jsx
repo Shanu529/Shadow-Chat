@@ -12,7 +12,13 @@ export default function MessageBubble({ msg, isOwn }) {
     >
       {/* Avatar */}
       { !isOwn && (
-        <Avatar name={msg.username || "Shadow"} size={28} />
+        <Avatar
+          name={
+            typeof msg.username === "string"
+              ? msg.username
+              : msg.username?.username || "Shadow"
+          }
+        />
       )}
 
       {/* Message Content */}
@@ -23,9 +29,11 @@ export default function MessageBubble({ msg, isOwn }) {
       >
         {/* Username */}
         {!isOwn && (
-          <span className="text-[11px] text-gray-400 ml-1 mb-1">
-            {msg.username}
-          </span>
+          <span>
+          {typeof msg.username === "string"
+            ? msg.username
+            : msg.username?.username || "Shadow"}
+        </span>
         )}
 
         {/* Message Box */}
