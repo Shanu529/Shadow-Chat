@@ -7,7 +7,7 @@ import { UserProvider } from "./context/UsersContext"
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata = {
-  metadataBase: new URL("https://shadowchat.vercel.app"),
+  metadataBase: new URL("https://shadowchat.in"),
 
   title: {
     default: "Shadow Chat - Anonymous Chat App",
@@ -15,7 +15,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: "https://shadowchat.vercel.app",
+    canonical: "https://shadowchat.in",
   },
   description:
     "Shadow Chat is a real-time anonymous chat platform where you can talk with strangers worldwide. No login required. Enjoy private, fast, and secure chatting.",
@@ -38,7 +38,8 @@ export const metadata = {
     title: "Shadow Chat - Anonymous Global Chat App",
     description:
       "Talk with strangers worldwide using Shadow Chat. Real-time anonymous chatting platform.",
-    url: "https://shadowchat.vercel.app",
+    url: "https://shadowchat.in",
+    
     siteName: "Shadow Chat",
     images: [
       {
@@ -94,7 +95,8 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
                 name: "Shadow Chat",
-                url: "https://shadowchat.vercel.app",
+                url: "https://shadowchat.in",
+                image: "https://shadowchat.in/logo.ico",
                 description:
                   "Anonymous real-time chat platform to talk with strangers worldwide.",
               }),

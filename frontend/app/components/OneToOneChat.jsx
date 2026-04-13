@@ -56,7 +56,7 @@ export default function OneToOneChat() {
   }, []);
     useEffect(() => {
       return () => {
-            console.log("leave chat useeffect running...");
+            // console.log("leave chat useeffect running...");
             
           if (socket.connected) {
             socket.emit("leave_chat");
@@ -91,7 +91,7 @@ export default function OneToOneChat() {
 
   const stop = () => {
     socket.emit("leave_chat");
-    console.log("leave chat called...");
+    // console.log("leave chat called...");
     
     setPhase("idle");
     setMessages([]);

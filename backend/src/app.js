@@ -40,20 +40,20 @@ const redis = new Redis({
 
 
 
-redis.on("connect", () => {
-    console.log("redis runnnning");
+// redis.on("connect", () => {
+//     console.log("redis runnnning");
 
-})
-redis.on("error", (error) => {
-    console.log("error at redis", error);
+// })
+// redis.on("error", (error) => {
+//     console.log("error at redis", error);
 
-})
+// })
 
 let waitinguser = null;
 let userRoom = {};
 
 io.on("connection", (socket) => {
-    console.log("user connected", socket.id);
+    // console.log("user connected", socket.id);
 
     // global joinning
     socket.on("join_global", async () => {
@@ -77,7 +77,7 @@ io.on("connection", (socket) => {
             }
 
             socket.emit("global_history", message.reverse());
-            console.log("history sending:", message);
+            // console.log("history sending:", message);
         } catch (error) {
             console.error("Error fetching history:", error);
         }
@@ -161,7 +161,7 @@ io.on("connection", (socket) => {
             }
         }
 
-        console.log("room cleaned:", roomId);
+        // console.log("room cleaned:", roomId);
     });
 
     socket.on("disconnect", () => {
@@ -178,14 +178,14 @@ io.on("connection", (socket) => {
                 }
             }
 
-            console.log("room removed due to disconnect:", roomId);
+            // console.log("room removed due to disconnect:", roomId);
         }
 
         if (waitinguser === socket.id) {
             waitinguser = null;
         }
 
-        console.log("user disconnected", socket.id);
+        // console.log("user disconnected", socket.id);
     });
 
 });
@@ -197,5 +197,5 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
-  console.log("server is running...");
+//   console.log("server is running...");
 });

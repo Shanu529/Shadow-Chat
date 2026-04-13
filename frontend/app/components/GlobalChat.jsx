@@ -48,7 +48,7 @@ const { user } = useUser();
 
   // listen first
   socket.on("global_history", (msg) => {
-    console.log("history received", msg);
+    // console.log("history received", msg);
     setMessages(msg);
   });
 
@@ -61,7 +61,7 @@ const { user } = useUser();
 
   //  IMPORTANT
   socket.on("connect", () => {
-    console.log("connected", socket.id);
+    // console.log("connected", socket.id);
     socket.emit("join_global"); //  guaranteed
   });
 
