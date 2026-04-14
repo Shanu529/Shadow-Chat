@@ -43,7 +43,7 @@ export const metadata = {
     siteName: "Shadow Chat",
     images: [
       {
-        url: "/logo.ico",
+        url: "/favicon.ico",
         width: 1200,
         height: 630,
         alt: "Shadow Chat",
@@ -62,8 +62,10 @@ export const metadata = {
   },
 
   icons: {
-    icon: "/logo.ico",
-  },
+  icon: "/favicon.ico",
+  shortcut: "/favicon.ico",
+  apple: "/favicon.ico",
+},
 
   robots: {
     index: true,

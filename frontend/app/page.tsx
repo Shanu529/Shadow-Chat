@@ -1,88 +1,55 @@
-"use client";
-
-import AppShell from "./components/AppShell";
-import { useUser } from "./context/UsersContext";
-import User from "./components/User";
+import HomeClient from "./homeClient/page";
 
 export default function Home() {
-  const { user } = useUser();
-
   return (
-    <main>
-
-      {!user ? <User /> : <AppShell />}
-
-      {/* 🔥 SEO CONTENT START */}
-      <section className="p-6 text-gray-300 space-y-6">
-
-        <h1 className="text-3xl font-bold text-white">
-          ShadowChat - Anonymous Real-Time Chat App
+    <main className="min-h-screen flex flex-col bg-black text-white">
+      <section className="text-center py-4 sm:py-6 px-4 border-b border-gray-800">
+        <h1 className="text-sm px-5 md:px-0 sm:text-3xl font-bold leading-tight">
+          ShadowChat – Anonymous 1-on-1 & Global Chat
         </h1>
 
-        <p>
+        <p className="text-gray-400 text-xs sm:text-base mt-1">
+          Chat instantly with strangers • No login required • Stay anonymous
+        </p>
+      </section>
+      <div className="flex-1 overflow-hidden">
+        <HomeClient />
+      </div>
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 py-8 text-gray-300 space-y-6 text-left border-t border-gray-800">
+        <h2 className="text-lg sm:text-2xl font-semibold text-white">
+          About ShadowChat
+        </h2>
+
+        <p className="text-sm sm:text-base leading-relaxed">
           ShadowChat is a powerful anonymous chat platform that allows users to
-          connect and talk with strangers worldwide instantly. Built with modern
-          technology, ShadowChat provides fast, secure, and real-time messaging
-          without requiring any login or personal information.
+          connect and talk with strangers worldwide instantly. It provides fast,
+          secure, and real-time messaging without requiring any login or
+          personal information.
         </p>
 
-        <p>
-          Whether you want to make new friends, have random conversations, or
-          explore global communication, ShadowChat offers a seamless experience
-          with privacy and speed at its core.
-        </p>
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-white font-medium text-base sm:text-lg">
+              🌍 Global Chat
+            </h3>
+            <p className="text-sm sm:text-base text-gray-400">
+              Join a public chat room where anyone can send and receive messages
+              in real-time. Perfect for open conversations with people from
+              around the world.
+            </p>
+          </div>
 
-        <h2 className="text-2xl font-semibold text-white">
-          Why Choose ShadowChat?
-        </h2>
-
-        <ul className="list-disc ml-6 space-y-2">
-          <li>Anonymous chatting without registration</li>
-          <li>Instant real-time messaging system</li>
-          <li>Secure and private conversations</li>
-          <li>Modern UI with fast performance</li>
-          <li>Works on mobile and desktop devices</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-white">
-          Features of ShadowChat
-        </h2>
-
-        <ul className="list-disc ml-6 space-y-2">
-          <li>Connect with strangers globally</li>
-          <li>High-speed real-time chat experience</li>
-          <li>No data storage for better privacy</li>
-          <li>Simple and clean user interface</li>
-          <li>Secure communication channels</li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold text-white">
-          How ShadowChat Works
-        </h2>
-
-        <p>
-          ShadowChat connects users randomly across the world using a real-time
-          communication system. Once you open the app, you are instantly matched
-          with another user, allowing you to start chatting immediately without
-          any signup process.
-        </p>
-
-        <p>
-          The platform ensures privacy by not storing personal data, making it a
-          safe and anonymous environment for conversations.
-        </p>
-
-        <h2 className="text-2xl font-semibold text-white">
-          Benefits of Anonymous Chat
-        </h2>
-
-        <ul className="list-disc ml-6 space-y-2">
-          <li>Freedom to express thoughts openly</li>
-          <li>No pressure of identity or profile</li>
-          <li>Meet people from different cultures</li>
-          <li>Safe and private communication</li>
-        </ul>
-
+          <div>
+            <h3 className="text-white font-medium text-base sm:text-lg">
+              💬 1-on-1 Random Chat
+            </h3>
+            <p className="text-sm sm:text-base text-gray-400">
+              Get instantly matched with a random stranger for a private
+              conversation. Stay anonymous and chat freely without sharing any
+              personal details.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
   );

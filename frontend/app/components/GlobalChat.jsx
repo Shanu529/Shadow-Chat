@@ -10,7 +10,6 @@ import {socket} from "../lib/socket"
 
 import {useLayoutEffect} from "react"
 
-
 import {useUser} from "../context/UsersContext";
 
 export default function GlobalChat() {
@@ -20,7 +19,7 @@ export default function GlobalChat() {
 );
 const { user } = useUser();
   const [messages, setMessages] = useState([]);
-
+  const [loading, SetLoading] = useState(true);
   const bottomRef = useRef(null);
 
   const [username, setUsername] = useState();
@@ -50,6 +49,8 @@ const { user } = useUser();
   socket.on("global_history", (msg) => {
     // console.log("history received", msg);
     setMessages(msg);
+    // set loading false
+    SetLoading(false);
   });
 
   socket.on("message_receive", (msg) => {
@@ -97,17 +98,19 @@ const { user } = useUser();
       
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 scroll-smooth">
 
-        {messages.length === 0 && (
-          <Loading/>
-        )}
-
-        {messages.map((msg) => (
-          <MessageBubble
-            key={msg.id}
-            msg={msg}
-            isOwn={msg.userId === myId}
-          />
-        ))}
+        {
+          loading ? ( <Loading/> ) :messages.length === 0 ?(
+             <p className="text-center text-gray-400 mt-4">No messages yet</p>
+          ) : (
+            messages.map((msg)=>{
+              <MessageBubble
+              key={msg.id}
+              msg={msg}
+              isOwn={msg.userId == myId}
+              />
+            })
+          )
+        }
 
        
        <div ref={bottomRef} />
