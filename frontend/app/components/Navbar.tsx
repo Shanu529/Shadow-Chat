@@ -14,7 +14,7 @@ export default function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.ico" alt="logo" width={28} height={28} />
+            <Image src="/favicon.ico" alt="logo" width={28} height={28} />
             <span className="font-bold text-white text-base sm:text-lg">
               Shadow Chat
             </span>

@@ -2,7 +2,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { UserProvider } from "./context/UsersContext"
+import { UserProvider } from "./context/UsersContext";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -14,6 +14,9 @@ export const metadata = {
     template: "%s | Shadow Chat",
   },
 
+  other: {
+    "application-name": "Shadow Chat",
+  },
   alternates: {
     canonical: "https://shadowchat.in",
   },
@@ -33,23 +36,20 @@ export const metadata = {
   authors: [{ name: "Shanu Chhetri" }],
   creator: "Shanu Chhetri",
   publisher: "Shadow Chat",
-
   openGraph: {
     title: "Shadow Chat - Anonymous Global Chat App",
     description:
       "Talk with strangers worldwide using Shadow Chat. Real-time anonymous chatting platform.",
     url: "https://shadowchat.in",
-    
     siteName: "Shadow Chat",
     images: [
       {
-        url: "/favicon.ico",
-        width: 1200,
-        height: 630,
+        url: "/web-app-manifest-512x512.png",
+        width: 512,
+        height: 512,
         alt: "Shadow Chat",
       },
     ],
-
     locale: "en_US",
     type: "website",
   },
@@ -58,14 +58,14 @@ export const metadata = {
     card: "summary_large_image",
     title: "Shadow Chat",
     description: "Talk with strangers worldwide",
-    images: ["/shadow.png"],
+    images: ["/web-app-manifest-512x512.png"],
   },
 
   icons: {
-  icon: "/favicon.ico",
-  shortcut: "/favicon.ico",
-  apple: "/favicon.ico",
-},
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 
   robots: {
     index: true,
@@ -86,24 +86,39 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className="bg-black text-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "Shadow Chat",
+              url: "https://shadowchat.in",
+
+              image: "https://shadowchat.in/web-app-manifest-512x512.png", //
+              applicationCategory: "CommunicationApplication",
+              description:
+                "Anonymous real-time chat platform to talk with strangers worldwide.",
+
+              author: {
+                "@type": "Person",
+                name: "Shanu Chhetri",
+              },
+
+              publisher: {
+                "@type": "Organization",
+                name: "NextIn",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://shadowchat.in/web-app-manifest-512x512.png",
+                },
+              },
+            }),
+          }}
+        />
+
         <UserProvider>
           <Navbar />
-
-          {/* SEO structured data */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "WebApplication",
-                name: "Shadow Chat",
-                url: "https://shadowchat.in",
-                image: "https://shadowchat.in/logo.ico",
-                description:
-                  "Anonymous real-time chat platform to talk with strangers worldwide.",
-              }),
-            }}
-          />
 
           <main className="">{children}</main>
         </UserProvider>

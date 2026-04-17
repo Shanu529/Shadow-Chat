@@ -36,6 +36,7 @@ const { user } = useUser();
       username:user?.username || "Shadow",
       ts: Date.now(),
     };
+     console.log("Sending:", newMsg); //
     socket.emit("message_send",newMsg);
   };
 
@@ -102,13 +103,13 @@ const { user } = useUser();
           loading ? ( <Loading/> ) :messages.length === 0 ?(
              <p className="text-center text-gray-400 mt-4">No messages yet</p>
           ) : (
-            messages.map((msg)=>{
-              <MessageBubble
+            messages.map((msg) => (
+            <MessageBubble
               key={msg.id}
               msg={msg}
-              isOwn={msg.userId == myId}
-              />
-            })
+              isOwn={msg.userId === myId}
+            />
+          ))
           )
         }
 
