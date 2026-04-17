@@ -36,7 +36,6 @@ const { user } = useUser();
       username:user?.username || "Shadow",
       ts: Date.now(),
     };
-     console.log("Sending:", newMsg); //
     socket.emit("message_send",newMsg);
   };
 
